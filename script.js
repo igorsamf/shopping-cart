@@ -7,6 +7,7 @@ const catchOl = document.querySelector('.cart__items');
 const catchButton = document.querySelectorAll('.item__add');
 // console.log(catchButton);
 const catchEmptyButton = document.querySelector('.empty-cart');
+const catchLoader = document.querySelector('.loading');
 
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
@@ -84,7 +85,12 @@ catchEmptyButton.addEventListener('click', () => {
   catchOl.innerHTML = '';
 });
 }
-
+function loadingMessage() {
+  document.createElement()
+return catchLoader.innerText.setInterval(() => {
+  
+}, 500);
+}
 emptyCart();
 clickListener();
-window.onload = () => { callFetchProducts(); };
+window.onload = () => { callFetchProducts(); emptyCart(); };
