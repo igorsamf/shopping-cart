@@ -1,3 +1,13 @@
+// const { fetchItem } = require("./helpers/fetchItem");
+
+const catchSection = document.querySelector('.items');
+// console.log(catchSection);
+const catchOl = document.querySelector('.cart__items');
+// console.log(catchOl);
+const catchButton = document.querySelectorAll('.item__add');
+// console.log(catchButton);
+const catchEmptyButton = document.querySelector('.empty-cart');
+
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
   img.className = 'item__image';
@@ -29,7 +39,7 @@ function getSkuFromProductItem(item) {
 }
 
 function cartItemClickListener(event) {
-  // coloque seu código aqui
+event.target.remove();
 }
 
 function createCartItemElement({ sku, name, salePrice }) {
@@ -40,4 +50,41 @@ function createCartItemElement({ sku, name, salePrice }) {
   return li;
 }
 
-window.onload = () => { };
+async function callFetchProducts() {
+  const getProducts = await fetchProducts();
+  const productsResults = getProducts.results;
+  // console.log(productsResults); 
+  productsResults.forEach((product) => {
+    const { id: sku, title: name, thumbnail: image } = product;
+    // console.log(sku, name, image);
+catchSection.appendChild(createProductItemElement({ sku, name, image }));
+  });
+}
+
+async function addProductsOnCart(id) {
+  const getItems = await fetchItem(id);
+  // console.log(getItems);
+const { id: sku, title: name, price: salePrice } = getItems;
+// console.log(sku, name, salePrice);
+catchOl.appendChild(createCartItemElement({ sku, name, salePrice }));
+}
+// console.log(addProductsOnCart('MLB1341706310'));
+
+function clickListener() {
+  catchSection.addEventListener('click', (event) => {
+    // console.log(event.target);
+    if (event.target.className === 'item__add') {
+addProductsOnCart(getSkuFromProductItem(event.target.parentNode));
+    }
+  }); 
+}
+
+function emptyCart() {
+catchEmptyButton.addEventListener('click', () => {
+  catchOl.innerHTML = '';
+});
+}
+
+emptyCart();
+clickListener();
+window.onload = () => { callFetchProducts(); };
