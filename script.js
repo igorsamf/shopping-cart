@@ -86,7 +86,7 @@ catchEmptyButton.addEventListener('click', () => {
 });
 }
 function loadingMessage() {
-  document.createElement()
+  document.createElement();
 return catchLoader.innerText.setInterval(() => {
   
 }, 500);
