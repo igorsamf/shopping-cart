@@ -18,7 +18,7 @@ it("testa se fetch é chamada com a API", async () => {
 it("Teste se o retorno da função 'fetchProducts' com o argumento 'computador' é uma estrutura de dados igual ao objeto 'computadorSearch'", async () => {
  expect(await fetchProducts('computador')).toEqual(computadorSearch);
 })
-it("testa se retorna erro quando a fetchproducts é chamada sem parametro", () => {
-  expect(fetchProducts()).rejects.toThrow(Error);
+it("testa se retorna erro quando a fetchproducts é chamada sem parametro", async () => {
+  expect(await fetchProducts()).toEqual(new Error('You must provide an url'));
 })
 });
