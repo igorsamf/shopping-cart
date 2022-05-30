@@ -117,6 +117,9 @@ async function callFetchProducts() {
 catchSection.appendChild(createProductItemElement({ sku, name, image }));
   });
 }
+function callSavedCartItems() {
+catchOl.innerHTML = getSavedCartItems();
+}
 
 cartItemClickListener();
 emptyCart();
@@ -124,6 +127,6 @@ clickListener();
 window.onload = () => { 
   callFetchProducts();
    emptyCart();
-    getSavedCartItems();
+    callSavedCartItems();
      calculatePrice();
  };

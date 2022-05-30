@@ -1,7 +1,6 @@
 const getSavedCartItems = () => {
-const catchLocal = localStorage.getItem('itemCart');
-const catchOl = document.querySelector('.cart__items');
-catchOl.innerHTML = catchLocal;
+const catchLocal = localStorage.getItem('cartItems');
+return catchLocal;
 };
 
 if (typeof module !== 'undefined') {
